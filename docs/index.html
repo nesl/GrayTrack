@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>GrayTrack · Beyond Direct Sensing</title>
+  <meta name="description" content="GrayTrack combines sparse direct observations with anonymous events from third-party sensors for road-constrained vehicle tracking.">
+  <link rel="canonical" href="https://nesl.github.io/GrayTrack/">
+  <meta property="og:title" content="GrayTrack · Beyond Direct Sensing">
+  <meta property="og:description" content="Extending vehicle tracking with weak, indirect observations from third-party sensors.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nesl.github.io/GrayTrack/">
+  <meta property="og:image" content="https://nesl.github.io/GrayTrack/assets/scenario.jpg">
+  <meta property="og:image:alt" content="Vehicle tracking across a road network with sparse direct sensors and third-party indirect sensors.">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">IoTAE Workshop · 2026</p>
+      <p class="wordmark">Gray<span>Track</span></p>
+      <h1>Beyond Direct Sensing: Harnessing Indirect Observations from Third-Party Sensors in Vehicle Tracking</h1>
+      <p class="authors">Gaofeng Dong<sup>*</sup>, Vamsi Eyunni<sup>*</sup>, Pragya Sharma, Kang Yang, Mani Srivastava</p>
+      <p class="affiliation">Electrical and Computer Engineering · University of California, Los Angeles</p>
+      <p class="contribution"><sup>*</sup> Equal contribution</p>
+      <nav class="links" aria-label="Project resources">
+        <!-- ARXIV_PLACEHOLDER: replace #paper with the arXiv abstract URL when available. -->
+        <a class="button primary" href="#paper">Paper <span>· arXiv soon</span></a>
+        <a class="button" href="https://github.com/nesl/GrayTrack">Code on GitHub <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <figure class="scenario">
+        <img src="assets/scenario.jpg" width="1462" height="975" fetchpriority="high" alt="A vehicle follows a route through a neighborhood. Sparse blue cameras provide direct observations, while gray third-party cameras provide indirect passage events along the route.">
+        <figcaption>Tracking beyond direct sensor coverage, using weak cues from third-party sensing assets.</figcaption>
+      </figure>
+
+      <section aria-labelledby="abstract-heading">
+        <h2 id="abstract-heading">Abstract</h2>
+        <p>Directly accessible sensors are often sparse, leaving long gaps in vehicle tracking. Additional third-party sensors may be nearby, but their raw data remain inaccessible. <strong>GrayTrack</strong> combines weak, anonymous passage events from these “gray assets” with sparse direct observations using a road-constrained particle filter. We build a CARLA–Mininet-WiFi pipeline that infers passages from encrypted camera-traffic metadata and evaluates their value for downstream tracking. The detector achieves an event-level F1 of 0.989. Incorporating indirect observations reduces trajectory RMSE by 60.1% and catastrophic track loss from 35.8% to 0.3%, demonstrating that even weak observations can extend tracking coverage.</p>
+      </section>
+
+      <section aria-labelledby="method-heading">
+        <h2 id="method-heading">From indirect observations to vehicle tracks</h2>
+        <figure class="system">
+          <a href="assets/system.png" aria-label="View the GrayTrack system diagram at full size">
+            <img src="assets/system.png" width="1294" height="562" loading="lazy" alt="Encrypted third-party camera traffic passes through packet grouping and vehicle-passage detection. A road-constrained particle filter fuses these events with time, location, and identity from accessible cameras and a road map to track vehicles.">
+          </a>
+          <figcaption>Packet timing and size yield anonymous passage events. Road-network constraints connect these events with sparse, identified direct observations.</figcaption>
+        </figure>
+      </section>
+
+      <section aria-labelledby="results-heading">
+        <h2 id="results-heading">Key results</h2>
+        <dl class="metrics">
+          <div>
+            <dt>Lower trajectory RMSE</dt>
+            <dd>60.1<span>%</span></dd>
+            <dd class="detail">92.3 m → 36.8 m</dd>
+          </div>
+          <div>
+            <dt>Passage-detection F1</dt>
+            <dd>0.989</dd>
+            <dd class="detail">242 held-out camera sequences</dd>
+          </div>
+          <div>
+            <dt>Catastrophic track loss</dt>
+            <dd class="comparison">35.8<span>% → </span>0.3<span>%</span></dd>
+            <dd class="detail">Trajectories with RMSE &gt; 100 m</dd>
+          </div>
+        </dl>
+        <p class="caption">Tracking results compare Road-PF with direct observations alone against direct observations plus noisy indirect events at measured detector error rates.</p>
+      </section>
+
+      <section id="code" aria-labelledby="code-heading">
+        <h2 id="code-heading">Code</h2>
+        <div class="parts">
+          <article>
+            <p class="part-label">Part 1</p>
+            <h3>Testbed &amp; passage detection</h3>
+            <p>CARLA capture, Mininet-WiFi replay, learned packet grouping, and anonymous passage-event export.</p>
+            <a href="https://github.com/nesl/GrayTrack/tree/main/Part1-testbed">Explore Part 1 <span aria-hidden="true">↗</span></a>
+          </article>
+          <article>
+            <p class="part-label">Part 2</p>
+            <h3>Road-constrained tracking</h3>
+            <p>Road-PF and tracking baselines, with experiments on sensing noise, blind gaps, and multiple vehicles.</p>
+            <a href="https://github.com/nesl/GrayTrack/tree/main/Part2-RoadPF">Explore Part 2 <span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+      </section>
+
+      <section id="paper" aria-labelledby="paper-heading">
+        <h2 id="paper-heading">Paper &amp; citation</h2>
+        <!-- Update this availability note and both citation copies when arXiv is available. -->
+        <p>The arXiv version is coming soon. <a href="graytrack.bib" download>Download BibTeX</a></p>
+        <pre aria-label="BibTeX citation"><code>@misc{dong2026graytrack,
+  title  = {Beyond Direct Sensing: Harnessing Indirect Observations from Third-Party Sensors in Vehicle Tracking},
+  author = {Dong, Gaofeng and Eyunni, Vamsi and Sharma, Pragya and Yang, Kang and Srivastava, Mani},
+  year   = {2026},
+  url    = {https://nesl.github.io/GrayTrack/},
+  note   = {arXiv version forthcoming}
+}</code></pre>
+      </section>
+    </main>
+
+    <footer>GrayTrack · UCLA · 2026</footer>
+  </div>
+</body>
+</html>

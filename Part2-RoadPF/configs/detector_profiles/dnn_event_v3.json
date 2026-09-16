@@ -1,0 +1,38 @@
+{
+  "profile": "dnn_event_v3",
+  "detector": "dnn_passage_event",
+  "detector_version": "CarVisibleLSTM_7 + Event Aggregator, held-out TEST split",
+  "operating_threshold": null,
+  "status": "final",
+  "data": "real",
+  "description": "Event-level passage-detector evaluation.",
+  "evaluation": {
+    "event_level": true,
+    "source_file": "results/detector_eval_dnn_event_v3.csv",
+    "residuals_file": null,
+    "run_id": "event_eval_2026_08_21_test_split",
+    "derivation": "counts",
+    "rate_source": null,
+    "counts": {
+      "tp": 89,
+      "fp": 2,
+      "fn": 0,
+      "gt_passages": 89
+    },
+    "precision": 0.978022,
+    "recall": 1.0,
+    "f1": 0.988889,
+    "fov_radius_m": null,
+    "match_tolerance_s": null
+  },
+  "simulation": {
+    "false_negative_rate": 0.0,
+    "false_positive_rate": 0.022472,
+    "false_positive_rate_definition": "FP / (TP + FN), ghosts per true event",
+    "timing_jitter_std_s": 0.109,
+    "timing_bias_s": 0.022,
+    "apply_timing_bias": true,
+    "timing_jitter_provenance": "measured",
+    "observation_model_config": "configs/sidechannel_observation_model.dnn_event_v3.json"
+  }
+}

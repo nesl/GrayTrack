@@ -1,0 +1,25 @@
+{
+  "source": "detector profile dnn_event_v3.",
+  "notes": [
+  ],
+  "false_negative_rate": 0.0,
+  "false_positive_rate": 0.022472,
+  "timing_jitter_std_s": 0.109,
+  "timing_bias_s": 0.022,
+  "apply_timing_bias": true,
+  "per_camera": {},
+  "timing_residuals_s": "TODO",
+  "detector": "dnn_passage_event",
+  "detector_profile": "dnn_event_v3",
+  "data": "real",
+  "counts": {
+    "tp": 89,
+    "fp": 2,
+    "fn": 0,
+    "gt_passages": 89,
+    "n_detections": 91
+  },
+  "precision": 0.978022,
+  "recall": 1.0,
+  "f1": 0.988889
+}

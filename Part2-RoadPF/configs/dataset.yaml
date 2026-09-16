@@ -1,0 +1,40 @@
+# Shared dataset for tracking value, robustness, estimator comparison, and
+# multi-vehicle experiments. Changing these settings changes the cache key, so a
+# stale dataset cannot silently be reused.
+
+name: main
+
+# --- Region ----------------------------------------------------------------
+# A 260 x 260 m district of CARLA Town05 (world coordinates, metres).
+# Chosen because it yields a well-connected cordon: 28 inbound + 28 outbound
+# road crossings, merging to 12 physical perimeter camera sites.
+region: [-130.0, 130.0, -130.0, 130.0]
+
+# --- Sensors ---------------------------------------------------------------
+# Perimeter: one trusted camera per cordon crossing point. Crossings within
+# merge_radius are the two directions of one street and share a camera.
+perimeter_fov: 15.0
+perimeter_merge_radius: 20.0
+# Localisation error of a perimeter (accessible-video) detection.
+perimeter_noise_std: 2.0
+
+# Interior: greedy non-overlapping edge midpoints, >= interior_margin from the
+# cordon so interior and perimeter coverage never overlap. density 1.0 is the
+# natural non-overlapping budget => 15 cameras.
+interior_fov: 25.0
+interior_density: 1.0
+interior_margin: 30.0
+interior_seed: 42
+
+# --- Trajectories ----------------------------------------------------------
+n_trajectories: 120
+seed0: 5000
+dt: 0.25
+speed_min: 6.0
+speed_max: 12.0
+speed_noise_frac: 0.15
+# Reject routes that clip a corner of the region rather than crossing it.
+min_inside_dist: 150.0
+# Routes seeing zero interior cameras make conditions A/B/C identical, so they
+# add variance and no signal. The rejection count is recorded in the manifest.
+min_interior_events: 1

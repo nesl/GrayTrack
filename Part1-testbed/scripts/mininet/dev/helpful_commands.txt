@@ -1,0 +1,9 @@
+Check wifi link to ap1
+
+sta1 iw dev sta1-wlan0 link
+sta2 iw dev sta2-wlan0 link
+
+Force connect to ap1
+
+sta1 iwconfig sta1-wlan0 essid ssid-wifi
+sta2 iwconfig sta2-wlan0 essid ssid-wifi
